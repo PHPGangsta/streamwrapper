@@ -56,11 +56,24 @@ class StreamWrapperProxyTest extends \PHPUnit_Framework_TestCase
     {
         $this->proxy = new StreamWrapperProxy('name', 'spriebsch\\streamwrapper\\tests\\TestStreamWrapper', array('a' => 'A', 'b' => 'B'));
         $this->assertContains('name', stream_get_wrappers());
+        $this->assertEquals('A', TestStreamWrapper::$a);
+        $this->assertEquals('B', TestStreamWrapper::$b);
+    }
+
+    /**
+     * @covers spriebsch\streamwrapper\StreamWrapperProxy::__set
+     * @covers spriebsch\streamwrapper\StreamWrapperProxy::setParameter
+     */
+    public function testSetInterceptorSetsParameters()
+    {
+        $this->proxy = new StreamWrapperProxy('name', 'spriebsch\\streamwrapper\\tests\\TestStreamWrapper', array('a' => 'A', 'b' => 'B'));
+        $this->proxy->a = A;
+        $this->assertEquals('A', TestStreamWrapper::$a);
     }
 }
 
 class TestStreamWrapper extends StreamWrapper
 {
-    protected static $a;
-    protected static $b;
+    public static $a;
+    public static $b;
 }
