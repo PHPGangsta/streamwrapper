@@ -48,7 +48,7 @@ class StreamWrapperProxy
      * @param string
      */
     protected $wrapperClass;
-    
+
     /**
      * @param array
      */
@@ -97,11 +97,11 @@ class StreamWrapperProxy
     {
         return call_user_func_array(array($this->wrapperClass, 'getParameter'), array($name));
     }
-    
+
     /**
      * Intercepts setting of public attributes
      */
-/*     
+/*
     public function __set($name, $value)
     {
         $this->setWrapperParameter($name, $value);
@@ -113,7 +113,7 @@ class StreamWrapperProxy
      */
     public function __get($name)
     {
-        return $this->getParameter($name);
+        return $this->getWrapperParameter($name);
     }
 
     /**

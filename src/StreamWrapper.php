@@ -47,13 +47,13 @@ abstract class StreamWrapper
 
         static::$$name = $value;
     }
-    
+
     public static function getParameter($name)
     {
         if (!in_array($name, array_keys(get_class_vars(get_called_class())))) {
             throw new Exception('Parameter "' . $name . '" does not exist', Exception::UNKNOWN_PARAMETER);
         }
-        
+
         return static::$$name;
     }
 }

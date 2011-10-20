@@ -58,7 +58,7 @@ interface StreamWrapperInterface
     /**
      * Returns the stream status
      * @return array
-     */    
+     */
     public function stream_stat();
 
     /**

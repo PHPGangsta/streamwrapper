@@ -41,6 +41,8 @@ use spriebsch\streamwrapper\StreamWrapperProxy;
 
 class StreamWrapperProxyTest extends \PHPUnit_Framework_TestCase
 {
+    protected $proxy;
+
     /**
      * @expectedException spriebsch\streamwrapper\Exception
      * @expectedExceptionCode spriebsch\streamwrapper\Exception::ILLEGAL_ARGUMENT
@@ -84,7 +86,7 @@ class StreamWrapperProxyTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @covers spriebsch\streamwrapper\StreamWrapperProxy::registerStreamWrapper
-     * @covers spriebsch\streamwrapper\StreamWrapperProxy::setParameter
+     * @covers spriebsch\streamwrapper\StreamWrapperProxy::setWrapperParameter
      */
     public function testSetsStreamWrapperParameters()
     {
@@ -95,8 +97,7 @@ class StreamWrapperProxyTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers spriebsch\streamwrapper\StreamWrapperProxy::__set
-     * @covers spriebsch\streamwrapper\StreamWrapperProxy::setParameter
+     * @covers spriebsch\streamwrapper\StreamWrapperProxy::setWrapperParameter
      */
     public function testSetInterceptorSetsParameterInStreamWrapper()
     {
@@ -109,21 +110,21 @@ class StreamWrapperProxyTest extends \PHPUnit_Framework_TestCase
      * @expectedException spriebsch\streamwrapper\Exception
      * @expectedExceptionCode spriebsch\streamwrapper\Exception::UNKNOWN_PARAMETER
      * @covers spriebsch\streamwrapper\StreamWrapperProxy::__get
-     * @covers spriebsch\streamwrapper\StreamWrapperProxy::getParameter
+     * @covers spriebsch\streamwrapper\StreamWrapperProxy::getWrapperParameter
      */
     public function testGetInterceptorThrowsExceptionWhenParameterIsUnknown()
     {
         $this->proxy = new StreamWrapperProxy('name', 'spriebsch\\streamwrapper\\tests\\TestStreamWrapper', array('a' => 'A', 'b' => 'B'));
         $temp = $this->proxy->c;
     }
-    
+
     /**
      * @covers spriebsch\streamwrapper\StreamWrapperProxy::__get
-     * @covers spriebsch\streamwrapper\StreamWrapperProxy::getParameter
+     * @covers spriebsch\streamwrapper\StreamWrapperProxy::getWrapperParameter
      */
     public function testGetInterceptorGetsParameterFromStreamWrapper()
     {
         $this->proxy = new StreamWrapperProxy('name', 'spriebsch\\streamwrapper\\tests\\TestStreamWrapper', array('a' => 'A', 'b' => 'B'));
         $this->assertEquals('A', $this->proxy->a);
-    }    
+    }
 }

@@ -15,7 +15,7 @@ class MyWrapper extends StreamWrapper implements StreamWrapperInterface
     protected $position = 0;
 
     public function stream_open($path, $mode, $options, &$opened_path)
-    {   
+    {
         $path = substr($path, strlen(static::$name . '://'));
 
         $filename = static::$basepath . '/' . $path;

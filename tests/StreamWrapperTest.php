@@ -47,7 +47,7 @@ class StreamWrapperTest extends \PHPUnit_Framework_TestCase
      */
     public function testSetParameterThrowsExceptionWhenParameterDoesNotExist()
     {
-        TestStreamWrapper::setWrapperParameter('c', 0);
+        TestStreamWrapper::setParameter('c', 0);
     }
 
     /**
@@ -56,7 +56,7 @@ class StreamWrapperTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetParameterThrowsExceptionWhenParameterDoesNotExist()
     {
-        TestStreamWrapper::getWrapperParameter('c', 0);
+        TestStreamWrapper::getParameter('c', 0);
     }
 
     /**
