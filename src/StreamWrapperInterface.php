@@ -37,23 +37,34 @@
 
 namespace spriebsch\streamwrapper;
 
-abstract class StreamWrapper
+interface StreamWrapperInterface
 {
-    public static function setParameter($name, $value)
-    {
-        if (!in_array($name, array_keys(get_class_vars(get_called_class())))) {
-            throw new Exception('Parameter "' . $name . '" does not exist', Exception::UNKNOWN_PARAMETER);
-        }
+    /**
+     * Opens the stream
+     *
+     * @param string $path path to read from (including the stream protocol name prefix)
+     * @return bool
+     */
+    public function stream_open($path, $mode, $options, &$opened_path);
 
-        static::$$name = $value;
-    }
-    
-    public static function getParameter($name)
-    {
-        if (!in_array($name, array_keys(get_class_vars(get_called_class())))) {
-            throw new Exception('Parameter "' . $name . '" does not exist', Exception::UNKNOWN_PARAMETER);
-        }
-        
-        return static::$$name;
-    }
+    /**
+     * Reads given number of bytes from the stream
+     *
+     * @param int $count
+     * @return string
+     */
+    public function stream_read($count);
+
+    /**
+     * Returns the stream status
+     * @return array
+     */    
+    public function stream_stat();
+
+    /**
+     * Checks whether end of file has been reached
+     *
+     * @return bool
+     */
+    public function stream_eof();
 }

@@ -83,6 +83,9 @@
   <exec executable="phpab">
    <arg line="-o ${source}/autoload.php ${source}" />
   </exec>
+  <exec executable="phpab">
+   <arg line="-o tests/autoload.php tests" />
+  </exec>
  </target>
 
  <target name="phpcb" description="Aggregate tool output with PHP_CodeBrowser">

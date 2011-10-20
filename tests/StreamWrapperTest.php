@@ -35,25 +35,37 @@
  * @license    BSD License
  */
 
-namespace spriebsch\streamwrapper;
+namespace spriebsch\streamwrapper\tests;
 
-abstract class StreamWrapper
+use spriebsch\streamwrapper\tests\TestStreamWrapper;
+
+class StreamWrapperTest extends \PHPUnit_Framework_TestCase
 {
-    public static function setParameter($name, $value)
+    /**
+     * @expectedException spriebsch\streamwrapper\Exception
+     * @covers spriebsch\streamwrapper\StreamWrapper::setParameter
+     */
+    public function testSetParameterThrowsExceptionWhenParameterDoesNotExist()
     {
-        if (!in_array($name, array_keys(get_class_vars(get_called_class())))) {
-            throw new Exception('Parameter "' . $name . '" does not exist', Exception::UNKNOWN_PARAMETER);
-        }
-
-        static::$$name = $value;
+        TestStreamWrapper::setWrapperParameter('c', 0);
     }
-    
-    public static function getParameter($name)
+
+    /**
+     * @expectedException spriebsch\streamwrapper\Exception
+     * @covers spriebsch\streamwrapper\StreamWrapper::getParameter
+     */
+    public function testGetParameterThrowsExceptionWhenParameterDoesNotExist()
     {
-        if (!in_array($name, array_keys(get_class_vars(get_called_class())))) {
-            throw new Exception('Parameter "' . $name . '" does not exist', Exception::UNKNOWN_PARAMETER);
-        }
-        
-        return static::$$name;
+        TestStreamWrapper::getWrapperParameter('c', 0);
+    }
+
+    /**
+     * @covers spriebsch\streamwrapper\StreamWrapper::setParameter
+     * @covers spriebsch\streamwrapper\StreamWrapper::getParameter
+     */
+    public function testSetAndGetParameterWorks()
+    {
+        TestStreamWrapper::setParameter('a', 43);
+        $this->assertEquals(43, TestStreamWrapper::getParameter('a'));
     }
 }
